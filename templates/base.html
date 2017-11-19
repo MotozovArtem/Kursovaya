@@ -1,10 +1,29 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
+    <title>{% block title %} {% endblock title %}</title>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <script type="jscript" rel="script" src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <script rel="script" type="jscript" src="{% static 'js/bootstrap.min.js' %}"></script>
 </head>
 <body>
+<div class="container">
+    {% include "header.html" %}
+    <div class="row">
+        {% include "left_menu.html" %}
+        <div class="col-sm-7">
+            {% block content %}
+            {% endblock content %}
+
+        </div>
+
+        {% include "right_menu.html" %}
+
+    </div>
+    {% include "footer.html" %}
+</div>
 
 </body>
 </html>
