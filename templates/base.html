@@ -4,13 +4,33 @@
 <head>
     <title>{% block title %} {% endblock title %}</title>
     <meta charset="UTF-8">
-    <script type="jscript" rel="script" src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
-    <script rel="script" type="jscript" src="{% static 'js/bootstrap.min.js' %}"></script>
+
+    <!--Bootstrap 4 & jQuery 3.2.1-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+
+    <!--CSS Styles-->
+    <link rel="stylesheet" type="text/css" href="{% static "css/main_styles.css" %}">
+
+    <script>
+        function my_slide(element, nextElement) {
+            $(element).onClick(function () {
+                $(nextElement).slideToggle("slow");
+            });
+        }
+
+    </script>
 </head>
 <body>
 <div class="container">
-    {% include "header.html" %}
+    <div class="row">
+        {% include "header.html" %}
+    </div>
+    <div class="row">
+        <div class="col"></div>
+    </div>
     <div class="row">
         {% include "left_menu.html" %}
         <div class="col-sm-7">
