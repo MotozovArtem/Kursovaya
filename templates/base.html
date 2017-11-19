@@ -14,13 +14,11 @@
     <!--CSS Styles-->
     <link rel="stylesheet" type="text/css" href="{% static "css/main_styles.css" %}">
 
+    <!--JS (jQuery) slide Toggle script-->
     <script>
-        function my_slide(element, nextElement) {
-            $(element).onClick(function () {
-                $(nextElement).slideToggle("slow");
-            });
-        }
-
+        $(".flip").click(function () {
+            $(this.lastElementChild).slideToggle("slow");
+        });
     </script>
 </head>
 <body>
