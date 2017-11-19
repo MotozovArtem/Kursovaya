@@ -123,5 +123,6 @@ STATICFILES_DIRS=[
 ]
 
 MEDIA_URL='/media/'
+
 MEDIA_ROOT=os.path.join(BASE_DIR, 'upload')
 
