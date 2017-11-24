@@ -16,13 +16,20 @@
 
 </head>
 <body>
-<div class="container">
-    <div class="row">
-        {% include "header.html" %}
+<div class="wrapper container">
+
+{#Длина col-3#}
+    {% include "header.html" %}
+
+
+<div class="row">
+    <div class="col-12">
     </div>
-    <div class="row">
-        <div class="col"></div>
+        <div class="col-12">
     </div>
+        <div class="col-12">
+    </div>
+</div>
     <div class="row">
         {% include "left_menu.html" %}
         <div class="col-sm-7">
@@ -30,12 +37,14 @@
             {% endblock content %}
 
         </div>
-
+{#Длина col-2#}
         {% include "right_menu.html" %}
 
     </div>
-    {% include "footer.html" %}
-</div>
 
+
+    {% include "footer.html" %}
+
+</div>
 </body>
 </html>
