@@ -4,7 +4,7 @@
 <head>
     <title>{% block title %} {% endblock title %}</title>
     <meta charset="UTF-8">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!--Bootstrap 4 & jQuery 3.2.1-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
@@ -18,18 +18,9 @@
 <body>
 <div class="wrapper container">
 
-{#Длина col-3#}
+    {#Длина col-3#}
     {% include "header.html" %}
-
-
-<div class="row">
-    <div class="col-12">
-    </div>
-        <div class="col-12">
-    </div>
-        <div class="col-12">
-    </div>
-</div>
+    <div>&nbsp</div>
     <div class="row">
         {% include "left_menu.html" %}
         <div class="col-sm-7">
@@ -37,7 +28,7 @@
             {% endblock content %}
 
         </div>
-{#Длина col-2#}
+        {#Длина col-2#}
         {% include "right_menu.html" %}
 
     </div>

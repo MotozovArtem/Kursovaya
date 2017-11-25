@@ -13,5 +13,7 @@ class Filter(models.Model):
     specific = models.TextField()
     price = models.DecimalField(max_digits=8, decimal_places=2)
     in_stock = models.BooleanField(default=True)
-    image=models.CharField(max_length=255, null=True)
+    image=models.CharField(max_length=255, null=True, blank=True)
 
+    def __str__(self):
+        return "{0} {1} {2}".format(self.article, self.brand, self.category)
