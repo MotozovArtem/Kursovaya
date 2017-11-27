@@ -16,14 +16,15 @@
 
 </head>
 <body>
-<div class="wrapper container">
+<div class="wrapper container wrapper">
 
     {#Длина col-3#}
     {% include "header.html" %}
-    <div>&nbsp</div>
+{#    <div class="content-container">#}
+
     <div class="row">
         {% include "left_menu.html" %}
-        <div class="col-sm-7">
+        <div class="col-sm-8">
             {% block content %}
             {% endblock content %}
 

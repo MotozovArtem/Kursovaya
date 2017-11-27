@@ -5,3 +5,16 @@
 .panel{
     display: none;
 }
+
+html, body{
+
+
+}
+
+.content-container{
+    padding-top:5px;
+}
+
+/*.wrapper{*/
+    /*min-height: 100%;*/
+/*}*/
