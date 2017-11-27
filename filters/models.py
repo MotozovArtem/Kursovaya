@@ -15,5 +15,9 @@ class Filter(models.Model):
     in_stock = models.BooleanField(default=True)
     image=models.CharField(max_length=255, null=True, blank=True)
 
-    def __str__(self):
-        return "{0} {1} {2}".format(self.article, self.brand, self.category)
+    class Meta:
+        verbose_name="Фильтр"
+        verbose_name_plural="Фильтры"
+
+    # def __str__(self):
+    #     return "{0} {1} {2}".format(self.article, self.brand, self.category)
