@@ -17,6 +17,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib import auth
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -24,6 +25,7 @@ urlpatterns = [
     url(r'^categories/', include("categories.urls")),
     url(r'^filters/', include("filters.urls")),
     url(r'^brands/', include("brands.urls")),
+    url(r'^auth/', include("loginsys.urls")),
 ]
 urlpatterns+=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

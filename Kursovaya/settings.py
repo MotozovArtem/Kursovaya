@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'main',
     'brands',
     'categories',
-    'filters'
+    'filters',
+    'loginsys',
 ]
 
 MIDDLEWARE = [
@@ -128,3 +129,8 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'upload')
+
+LOGIN_URL="login"
+LOGOUT_URL="logout"
+
+# THUMBNAIL_BASEDIR="thumbnails"

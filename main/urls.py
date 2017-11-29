@@ -2,5 +2,6 @@ from django.conf.urls import url
 from main import views
 from main.views import *
 urlpatterns = [
-    url(r'^$', MainPageView.as_view(), name="main"),
+    # url(r'^$', MainPageView.as_view(), name="main"),
+    url(r'^$', views.main, name='main'),
 ]
