@@ -21,11 +21,12 @@ from django.contrib import auth
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^main/', include("main.urls")),
+    url(r'^', include("main.urls")),
     url(r'^categories/', include("categories.urls")),
     url(r'^filters/', include("filters.urls")),
     url(r'^brands/', include("brands.urls")),
     url(r'^auth/', include("loginsys.urls")),
+    url(r'^lk/', include("lk.urls")),
 ]
 urlpatterns+=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

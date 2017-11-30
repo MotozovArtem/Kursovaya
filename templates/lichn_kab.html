@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %} {% endblock title %}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--Bootstrap 4 & jQuery 3.2.1-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+
+    <!--CSS Styles-->
+    <link rel="stylesheet" type="text/css" href="{% static "css/main_styles.css" %}">
+
+</head>
+<body>
+<div class="wrapper container wrapper">
+
+    {#Длина col-3#}
+    {% include "header.html" %}
+{#    <div class="content-container">#}
+
+    <div class="row">
+        {% include "left_menu_lk.html" %}
+        <div class="col-sm-10">
+            {% block content %}
+            {% endblock content %}
+
+        </div>
+
+    </div>
+
+
+    {% include "footer.html" %}
+
+</div>
+</body>
+</html>
