@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'categories',
     'filters',
     'loginsys',
-    'lk'
+    'lk',
+    'orders',
 ]
 
 MIDDLEWARE = [
