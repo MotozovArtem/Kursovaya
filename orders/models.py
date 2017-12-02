@@ -21,6 +21,7 @@ class Status(models.Model):
 
 
 class Order(models.Model):
+    total_price=models.DecimalField(max_digits=10, decimal_places=2, default=0) #Общая стоимость заказа
     id_order = models.AutoField(primary_key=True)
     customer_name = models.CharField(max_length=120, default=None, blank=True, null=True)
     customer_email = models.EmailField(default=None, blank=True, null=True)
@@ -41,6 +42,9 @@ class Order(models.Model):
 class ProductInOrder(models.Model):
     id_productInOrder = models.AutoField(primary_key=True)
     order = models.ForeignKey(Order, default=None, blank=True, null=True)
+    numb=models.IntegerField(default=1)
+    price_item=models.DecimalField(max_digits=10, decimal_places=2, default=0) #Цена, по которой продали товар
+    total_price=models.DecimalField(max_digits=10, decimal_places=2, default=0)#Общая стоимость на товар(кол-во*цену
     product = models.ForeignKey(Filter, default=None, blank=True, null=True)
     is_active = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True, auto_now=False)

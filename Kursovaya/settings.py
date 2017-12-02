@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'Kursovaya.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'Kursovaya',
+        'NAME': 'kursov',
         'USER': 'rienel',
         'PASSWORD': '1957',
         'HOST': 'localhost',
@@ -130,7 +130,7 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'upload')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'filters_images')
 
 LOGIN_URL="login"
 LOGOUT_URL="logout"

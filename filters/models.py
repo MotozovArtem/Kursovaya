@@ -14,7 +14,8 @@ class Filter(models.Model):
     price = models.DecimalField(max_digits=8, decimal_places=2, default=None, blank=True, null=True)
     in_stock = models.BooleanField(default=True)
 
-
+    def __str__(self):
+        return "{0}".format(self.article)
     class Meta:
         verbose_name="Фильтр"
         verbose_name_plural="Фильтры"
