@@ -10,6 +10,10 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+
+    <!--CSS Styles-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main_styles.css' %}">
+
 </head>
 <body>
 <div class="wrapper container wrapper">
@@ -17,7 +21,7 @@
     {#Длина col-3#}
     {% include "main/header.html" %}
 {#    <div class="content-container">#}
-
+{# content#}
     <div class="row" style="margin-top: 5px;">
         {% include "main/left_menu.html" %}
         <div class="col-lg-8">
