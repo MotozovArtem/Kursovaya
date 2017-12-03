@@ -5,7 +5,7 @@ from filters.models import *
 
 def main(request):
     filters=Filter.objects.filter(is_active=True)
-    return render(request, 'index.html', locals())
+    return render(request, 'main/index.html', locals())
 
 
 
