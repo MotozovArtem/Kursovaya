@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from django.views.generic.base import TemplateView
 from generic.mixins import CategoryListMixin
+from filters.models import *
 
 def main(request):
+    filters=Filter.objects.filter(is_active=True)
     return render(request, 'index.html', locals())
 
 

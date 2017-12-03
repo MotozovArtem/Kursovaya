@@ -65,7 +65,8 @@ class ProductInOrder(models.Model):
     def save(self, *args, **kwargs):
         self.price_item=self.product.price
         self.total_price=self.price_item*self.numb
-
+        if self.is_active:
+            self.product.count+=self.numb
         super(ProductInOrder, self).save(*args, **kwargs)
 
 

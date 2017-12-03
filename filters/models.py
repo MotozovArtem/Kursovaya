@@ -12,7 +12,8 @@ class Filter(models.Model):
     description = models.TextField(default=None, blank=True, null=True)
     specific = models.TextField(default=None, blank=True, null=True)
     price = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True, default=0.00)
-    in_stock = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=True)
+    count=models.IntegerField(default=0, )
 
     def __str__(self):
         return "{0}".format(self.article)
