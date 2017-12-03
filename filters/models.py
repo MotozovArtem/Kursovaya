@@ -11,7 +11,7 @@ class Filter(models.Model):
     brand = models.ForeignKey(Brand, default=None, blank=True, null=True)
     description = models.TextField(default=None, blank=True, null=True)
     specific = models.TextField(default=None, blank=True, null=True)
-    price = models.DecimalField(max_digits=8, decimal_places=2, default=None, blank=True, null=True)
+    price = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True, default=0.00)
     in_stock = models.BooleanField(default=True)
 
     def __str__(self):

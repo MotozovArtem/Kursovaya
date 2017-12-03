@@ -1,5 +1,6 @@
 from django.db import models
 from filters.models import Filter
+from django.db.models.signals import post_save
 
 
 # Create your models here.
@@ -21,7 +22,7 @@ class Status(models.Model):
 
 
 class Order(models.Model):
-    total_price=models.DecimalField(max_digits=10, decimal_places=2, default=0) #Общая стоимость заказа
+    total_price=models.DecimalField(max_digits=10, decimal_places=2, default=0.00) #Общая стоимость заказа
     id_order = models.AutoField(primary_key=True)
     customer_name = models.CharField(max_length=120, default=None, blank=True, null=True)
     customer_email = models.EmailField(default=None, blank=True, null=True)
@@ -39,12 +40,16 @@ class Order(models.Model):
         verbose_name_plural = "Заказы"
 
 
+    def save(self, *args, **kwargs):
+        super(Order, self).save(*args, **kwargs)
+
+
 class ProductInOrder(models.Model):
     id_productInOrder = models.AutoField(primary_key=True)
     order = models.ForeignKey(Order, default=None, blank=True, null=True)
     numb=models.IntegerField(default=1)
-    price_item=models.DecimalField(max_digits=10, decimal_places=2, default=0) #Цена, по которой продали товар
-    total_price=models.DecimalField(max_digits=10, decimal_places=2, default=0)#Общая стоимость на товар(кол-во*цену
+    price_item=models.DecimalField(max_digits=10, decimal_places=2, default=0) #За сколько продали
+    total_price=models.DecimalField(max_digits=10, decimal_places=2, default=0.00)#Общая стоимость на товар(кол-во*цену
     product = models.ForeignKey(Filter, default=None, blank=True, null=True)
     is_active = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
@@ -56,6 +61,27 @@ class ProductInOrder(models.Model):
     class Meta:
         verbose_name = "Товар в заказе"
         verbose_name_plural = "Товары в заказе"
+
+    def save(self, *args, **kwargs):
+        self.price_item=self.product.price
+        self.total_price=self.price_item*self.numb
+
+        super(ProductInOrder, self).save(*args, **kwargs)
+
+
+
+#Главное не сохранять в пост save сигнале данные в моделе, после которой вызывается сигнал, иначе получится зацикливание
+def product_in_order_post_save(sender, instance, created, **kwargs):
+    order = instance.order
+    all_products_in_order = ProductInOrder.objects.filter(order=order)
+    order_total_price = 0
+    for item in all_products_in_order:
+        order_total_price += item.total_price
+    instance.order.total_price = order_total_price
+    instance.order.save(force_update=True)
+
+post_save.connect(product_in_order_post_save, sender=ProductInOrder)
+
 
 
 
