@@ -21,17 +21,17 @@
             <div class="col">
                 {% if user.is_authenticated %}
                     {% if perms.filters.add_filter %}
-                        <a href="/admin/">Личный кабинет(админка)</a> |
-                        <a href="/auth/logout/">Выход</a>
+                        <a href="{% url "login" %}">Личный кабинет(админка)</a> |
+                        <a href="{% url "logout" %}">Выход</a>
                     {% else %}
-                    <a href="/lk/">Личный кабинет</a> |
-                    <a href="/auth/logout/">Выход</a>
-                        {% endif %}
+                        <a href="{% url "login" %}">Личный кабинет</a> |
+                        <a href="{% url "logout" %}">Выход</a>
+                    {% endif %}
                 {% else %}
                     <a>Личный кабинет</a> |
-                    <a href="/auth/login/">Вход</a>
+                    <a href="{% url "login" %}">Вход</a>
 
-            {% endif %}
+                {% endif %}
             </div>
         </div>
         {#        <div>&nbsp</div>#}

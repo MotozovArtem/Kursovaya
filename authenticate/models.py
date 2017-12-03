@@ -11,11 +11,7 @@ class MyUserManager(BaseUserManager):
         if not email:
             raise ValueError('Users must have an email address')
 
-        user = self.model(
-            email=self.normalize_email(email),
-            date_of_birth=date_of_birth,
-        )
-
+        user = self.model(email=self.normalize_email(email), date_of_birth=date_of_birth, )
         user.set_password(password)
         user.save(using=self._db)
         return user
@@ -25,26 +21,22 @@ class MyUserManager(BaseUserManager):
         Creates and saves a superuser with the given email, date of
         birth and password.
         """
-        user = self.create_user(
-            email,
-            password=password,
-            date_of_birth=date_of_birth,
-        )
+        user = self.create_user(email, password=password, date_of_birth=date_of_birth, )
         user.is_admin = True
         user.save(using=self._db)
         return user
 
 
 class MyUser(AbstractBaseUser):
-    email = models.EmailField(verbose_name='email address', max_length=255, unique=True )
-    date_of_birth = models.DateField()
+    email = models.EmailField(verbose_name='email address', max_length=255, unique=True)
+    date_of_birth = models.DateField(null=True, blank=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
 
     objects = MyUserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['date_of_birth']
+    REQUIRED_FIELDS = []
 
     def get_full_name(self):
         # The user is identified by their email address
@@ -56,6 +48,10 @@ class MyUser(AbstractBaseUser):
 
     def __str__(self):  # __unicode__ on Python 2
         return self.email
+
+    # @property
+    # def is_authenticated(self):
+    #     return True
 
     def has_perm(self, perm, obj=None):
         "Does the user have a specific permission?"

@@ -25,8 +25,8 @@ urlpatterns = [
     url(r'^categories/', include("categories.urls")),
     url(r'^filters/', include("filters.urls")),
     url(r'^brands/', include("brands.urls")),
-    url(r'^auth/', include("loginsys.urls")),
+    url(r'^authenticate/', include("authenticate.urls")),
     url(r'^lk/', include("lk.urls")),
 ]
-urlpatterns+=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

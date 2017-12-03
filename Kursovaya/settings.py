@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'brands',
     'categories',
     'filters',
-    'loginsys',
+    'authenticate',
     'lk',
     'orders',
 ]
@@ -132,7 +132,9 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'filters_images')
 
-LOGIN_URL="login"
-LOGOUT_URL="logout"
+LOGIN_URL = "/authenticate/login"
+LOGOUT_URL = "/authenticate/logout"
+
+AUTH_USER_MODEL = 'authenticate.MyUser'
 
 # THUMBNAIL_BASEDIR="thumbnails"
