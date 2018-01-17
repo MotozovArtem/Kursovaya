@@ -1,48 +1,97 @@
 {% extends "main/base.html" %}
 {% load static %}
-{% block title %}Главная страница{% endblock title %}
+
+<title>{% block title %} {% endblock title %}</title>
+{% block header %}
+    {% include "main/header.html" %}
+{% endblock header %}
+{% block left-menu %}
+    {% include "main/left_menu.html" %}
+{% endblock left-menu %}
 {% block content %}
-    <div class="section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 bg-dark"><span class="title_section">Популярные позиции</span>
-                </div>
-            </div>
-            <div class="row mt-2 mb-2">
-                {% for filter in filters %}
-                    <div class="col-lg-3">
-                    <div class="product-item bg-dark">
-                        <div>
-                            <img src="/" class="img-fluid">
-                        </div>
-                        <h6>{{ filter.article }} {{ filter.category }}  {{ filter.brand }}</h6>
-                        <a href="/" class="add_to_cart px-auto">Посмотреть</a>
-                    </div>
-                    </div>
-                {% endfor %}
 
-
-            </div>
-            <div class="row">
-                <div class="col-lg-12 bg-dark"><span class="title_section">Новые поступления</span>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-3">
-
-                </div>
-                <div class="col-lg-3">
-
-                </div>
-                <div class="col-lg-3">
-
-                </div>
-                <div class="col-lg-3">
-
-                </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 bg-dark menu-style"><span class="title_section">Популярные позиции</span>
             </div>
         </div>
+        <div class="row mt-2 mb-2">
+            {% for filter in popular_filter %}
+                {% include "main/product_item_index.html" %}
+            {% endfor %}
+
+        </div>
+        <div class="row">
+            <div class="col-lg-12 bg-dark menu-style"><span class="title_section">Новые поступления</span>
+            </div>
+        </div>
+        <div class="row">
+            {% for filter in new_filter %}
+                {% include "main/product_item_index.html" %}
+            {% endfor %}
+        </div>
+        {% if filter_sale %}
+            <div class="row">
+                <div class="col-lg-12 bg-dark menu-style"><span class="title_section">Акции</span>
+                </div>
+
+            </div>
+
+            <div class="row">
+                {% for filter in filter_sale %}
+                    {% include "main/product_item_index.html" %}
+                {% endfor %}
+            </div>
+        {% endif %}
+{#        <div class="row ">#}
+{#            <div class="col-lg-12 bg-dark menu-style"><span class="title_section">Производители</span>#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="row">#}
+{#            <div class="col-lg-4 mt-2" style="height: 200px; text-align: center">#}
+{##}
+{#                <img style=" border: 1px solid #cccccc" width="250" height="130" class="img-fluid"#}
+{#                     src="/brand_images/{{ brands_image_list.2.image }}">#}
+{#            </div>#}
+{#            <div class="col-lg-4 mt-2" style="height: 250px; text-align: center; vertical-align: middle">#}
+{##}
+{#                <img style="border: 1px solid #cccccc" width="250" class="img-fluid"#}
+{#                     src="/brand_images/{{ brands_image_list.7.image }}">#}
+{#            </div>#}
+{#            <div class="col-lg-4 mt-2" style="height: 250px; text-align: center; vertical-align: middle">#}
+{#                <img style="border: 1px solid #cccccc" width="250" class="img-fluid"#}
+{#                     src="/brand_images/{{ brands_image_list.4.image }}"> {#Donaldson#}
+{#            </div>#}
+{##}
+{#        </div>#}
+{#        <div class="row">#}
+{#            <div class="col-lg-4 mt-2" style="height: 200px; text-align: center">#}
+{##}
+{#                <img style=" border: 1px solid #cccccc" width="250" height="130" class="img-fluid"#}
+{#                     src="/brand_images/{{ brands_image_list.2.image }}">#}
+{#            </div>#}
+{#            <div class="col-lg-4 mt-2" style="height: 250px; text-align: center; vertical-align: middle">#}
+{##}
+{#                <img style="border: 1px solid #cccccc" width="250" class="img-fluid"#}
+{#                     src="/brand_images/{{ brands_image_list.7.image }}">#}
+{#            </div>#}
+{#            <div class="col-lg-4 mt-2 align-text-bottom"#}
+{#                 style="height: 250px; text-align: center; vertical-align: middle">#}
+{#                <img style="border: 1px solid #cccccc" width="250" class="img-fluid"#}
+{#                     src="/brand_images/{{ brands_image_list.4.image }}"> {#Donaldson#}
+{#            </div>#}
+{##}
+{#        </div>#}
     </div>
-    <h1>Акции</h1>
-    <h1>Бренды</h1>
+
+
 {% endblock content %}
+{% block right-menu %}
+    {% include "main/right_menu.html" %}
+{% endblock right-menu %}
+{% block footer %}
+    {% include "main/footer.html" %}
+{% endblock footer %}
+
+
+

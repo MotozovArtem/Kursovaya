@@ -4,39 +4,41 @@
 <head>
     <title>{% block title %} {% endblock title %}</title>
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!--Bootstrap 4 & jQuery 3.2.1-->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
-
     <!--CSS Styles-->
     <link rel="stylesheet" type="text/css" href="{% static 'css/main_styles.css' %}">
-
+    <!--Custom JS file-->
+    {#    <script src="{% static "js/myscript.js" %}" type="text/javascript" rel="script" language="JavaScript">#}
+    {#    </script>#}
 </head>
 <body>
-<div class="wrapper container wrapper">
+<div class="container-fluid">
+    {% block header %}
+    {% endblock header %}
+    <div class="container-fluid wrapper" style="margin-top: 80px">
+        <div class="row">
 
-    {#Длина col-3#}
-    {% include "main/header.html" %}
-{#    <div class="content-container">#}
-{# content#}
-    <div class="row" style="margin-top: 5px;">
-        {% include "main/left_menu.html" %}
-        <div class="col-lg-8">
-            {% block content %}
-            {% endblock content %}
+            {% block left-menu %}
+            {% endblock left-menu %}
 
+            <div class="col-lg-8">
+                {% block content %}
+                {% endblock content %}
+            </div>
+            {% block right-menu %}
+            {% endblock right-menu %}
         </div>
-        {#Длина col-2#}
-        {% include "main/right_menu.html" %}
-
     </div>
-
-
-    {% include "main/footer.html" %}
-
 </div>
+{% block footer %}
+{% endblock footer %}
+<script src="{% static 'js/myscript.js' %}" language="JavaScript" type="text/javascript" rel="script"></script>
 </body>
 </html>
