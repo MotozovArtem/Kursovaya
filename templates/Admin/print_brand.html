@@ -1,0 +1,90 @@
+{% extends "admin/admin_base.html" %}
+
+{% block content %}
+    <div class="container-fluid" >
+        <div class=" row navbar navbar-expand-sm bg-light">
+
+{#            <form class="form-inline" method="POST" action="">#}
+{#                {% csrf_token %}#}
+{#                <input class="form-control mr-sm-2" name="search" type="text" placeholder="Поиск">#}
+{#                <button class="btn btn-success" type="submit">Поиск</button>#}
+{#            </form>#}
+{##}
+{#            <form class="form-inline ml-2" method="POST" action="">#}
+{#                {% csrf_token %}#}
+{#                <select class="form-control" name="sort">#}
+{#                    <option value="ins_surname" selected>Сортировать по</option>#}
+{#                    <option value="ins_surname">По артикулу А-Я</option>#}
+{#                    <option value="desc_surname">По артиклу Я-А</option>#}
+{#                    <option value="ins_age">По возрастанию цены</option>#}
+{#                    <option value="desc_age">По убыванию цены</option>#}
+{#                </select>#}
+{#            </form>#}
+
+
+            <div class="ml-auto mr-4">
+                {#            <button class="btn btn-success" ><a style="color: white;" href="{% url "add_filter" %}">Добавить</a></button>#}
+                <a href="{% url "add_brand" %}">
+                    <button class="btn btn-success">Добавить</button>
+                </a>
+            </div>
+            <form id="del_brand" method="POST" action="{% url "delete_brand" %}" class="form">
+                {% csrf_token %}
+                <input type="submit" class="btn btn-outline-success" value="Удалить">
+            </form>
+        </div>
+
+
+        <div class="row">
+            <div class="col-lg-12">
+                <table class="table table-bordered">
+                    <thead class="bg-light">
+                    <tr>
+                        <th>Название</th>
+                        <th>Активен</th>
+                        <th>Изменить</th>
+                        <th>Удалить</th>
+                    </tr>
+                    </thead>
+                    {% for brand in brand_list %}
+                        <tr>
+                            <td>{{ brand.name }}</td>
+                            {% if brand.is_active %}
+                                <td style="text-align: center">
+                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                </td>
+                            {% else %}
+                                <td style="text-align: center">
+                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                </td>
+                            {% endif %}
+                            <td>
+                                <a href="{% url "edit_brand" brand.id_brand %}">
+                                    <button type="submit" class="btn-sm btn-success">Изменить</button>
+                                </a>
+                            </td>
+                            <td style="text-align: center; vertical-align: middle">
+                                <label for="{{ brand.id_brand }}"></label>
+                                <input type="checkbox" name="del" id="{{ brand.id_brand }}" form="del_brand"
+                                       value="{{ brand.id_brand }}">
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+        <div class=" row navbar navbar-expand-sm bg-light">
+
+            <div class="ml-auto mr-4">
+                {#            <button class="btn btn-success" ><a style="color: white;" href="{% url "add_filter" %}">Добавить</a></button>#}
+                <a href="{% url "add_brand" %}">
+                    <button class="btn btn-success">Добавить</button>
+                </a>
+            </div>
+
+                <input type="submit" class="btn btn-outline-success" value="Удалить" form="del_brand">
+
+        </div>
+    </div>
+
+{% endblock content %}

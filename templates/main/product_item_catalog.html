@@ -1,0 +1,45 @@
+{% for image in filter_image_list %}
+    <div class="row mb-1 border product-item">
+        <div class="col-lg-4">
+            <div style="text-align: center">
+                <a href="{% url "filter_card" image.filter.id_filter %}">
+                    <img style="border: 1px solid #cccccc" width="120" class="img-fluid"
+                         src="/images/{{ image.image }}">
+                </a>
+            </div>
+            <p class="product-catalog">{{ image.filter.article }} {{ image.filter.category.name }} {{ image.filter.brand }}</p>
+        </div>
+        <div class="col-5 page-item">
+            <div class="table table-sm" style="font-size: 12px;">
+                {% autoescape off %}{{ image.filter.specific|truncatewords_html:30 }}{% endautoescape %}</div>
+        </div>
+        <div class="col-3">{% if image.filter.discount > 0 %}
+            <div class="new_price">
+                <span style="font-size: 14px;" class="badge badge-danger">Цена снижена!</span>
+                <h5>
+                    <del>{{ image.filter.price }} руб.</del>
+                </h5>
+                <h5 style="color: red;"> {{ image.filter.new_price }} руб. </h5>
+            </div>
+        {% else %}
+            <h5 class="price">{{ image.filter.price }} руб.</h5>
+        {% endif %}
+            <form class="form_buy_product" action="{% url "basket_adding" %}">
+                <button class="btn btn-success add_to_cart btn-sm mr-2" type="submit"
+                        data-filter-id="{{ image.filter.id_filter }}"
+                        data-name="{{ image.filter.category.name }}"
+                        data-article="{{ image.filter.article }}"
+                        data-brand="{{ image.filter.brand.name }}"
+                        {% if image.filter.discount > 0 %}
+                            data-price="{{ image.filter.new_price }}"
+                        {% else %}
+                            data-price="{{ image.filter.price }}"
+                        {% endif %}
+                        name="sub">В корзину
+                </button>
+            </form>
+            <a class="podrob mr-2" href="{% url "filter_card" image.filter.id_filter %}">Подробнее</a>
+        </div>
+
+    </div>
+{% endfor %}

@@ -1,0 +1,119 @@
+{% extends "admin/admin_base.html" %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row navbar navbar-expand-sm bg-light">
+            {#    <div class=" col-12 navbar navbar-expand-sm bg-light">#}
+
+{#            <form class="form-inline" method="POST" action="">#}
+{#                {% csrf_token %}#}
+{#                <input class="form-control" name="search" type="text" placeholder="Поиск">#}
+{#                <button class="btn btn-success" type="submit">Поиск</button>#}
+{#            </form>#}
+{##}
+{#            <form class="form-inline ml-2" method="POST" action="">#}
+{#                {% csrf_token %}#}
+{#                <select class="form-control" name="sort">#}
+{#                    <option value="ins_surname" selected>Сортировать по</option>#}
+{#                    <option value="ins_surname">По артикулу А-Я</option>#}
+{#                    <option value="desc_surname">По артиклу Я-А</option>#}
+{#                    <option value="ins_age">По возрастанию цены</option>#}
+{#                    <option value="desc_age">По убыванию цены</option>#}
+{#                </select>#}
+{##}
+{#            </form>#}
+            <div class="ml-auto mr-2">
+                {#            <button class="btn btn-success" ><a style="color: white;" href="{% url "add_filter" %}">Добавить</a></button>#}
+                <a href="{% url "add_filter" %}">
+                    <button class="btn btn-success ">Добавить</button>
+                </a>
+            </div>
+            <form id="change" method="POST" action="{% url "delete_filter" %}" class="form">
+                {% csrf_token %}
+                <input type="submit" class="btn btn-outline-success" value="Удалить">
+            </form>
+        </div>
+
+
+        <div class="row">
+            <div class="col-lg-12">
+
+                <table class="table table-bordered">
+                    <thead class="bg-light">
+                    <tr>
+                        <th>Артикул</th>
+                        <th>Категория</th>
+                        <th>Производитель</th>
+                        <th>Цена</th>
+                        <th>Активен</th>
+                        <th>Скидка, %</th>
+                        <th>Цена со скидкой</th>
+                        <th>Новинка</th>
+                        <th>Топ</th>
+                        <th>Изменить</th>
+                        <th>Удалить</th>
+                    </tr>
+                    </thead>
+                    {% for filter in filter_list %}
+                        <tr>
+                            <td>{{ filter.article }}</td>
+                            <td>{{ filter.category.name }}</td>
+                            <td>{{ filter.brand.name }}</td>
+                            <td>{{ filter.price }}</td>
+                            {% if filter.is_active %}
+                                <td style="text-align: center">Да</td>
+                            {% else %}
+                                <td style="text-align: center">Нет</td>
+                            {% endif %}
+                            <td>{{ filter.discount }} %</td>
+                            {% if filter.discount > 0 %}
+                                <td><!--Price with sale-->{{ filter.new_price }}</td>
+                            {% else %}
+                                <td><!--Price with sale-->{{ filter.price }}</td>
+                            {% endif %}
+                            <td style="text-align: center; vertical-align: middle"><!--New filter-->
+                                {% if filter.is_new %}
+                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                {% else %}
+                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                {% endif %}
+                            </td>
+                            <td style="text-align: center; vertical-align: middle">
+                                {% if filter.is_popular %}
+                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                {% else %}
+                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a href="{% url "edit_filter" filter.id_filter %}">
+                                    <button type="submit" class="btn-sm btn-success">Изменить</button>
+                                </a>
+                            </td>
+                            <td style="text-align: center; vertical-align: middle">
+                                <label for="{{ filter.id_filter }}"></label>
+                                <input type="checkbox" name="del" id="{{ filter.id_filter }}"
+                                       value="{{ filter.id_filter }}" form="change">
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+
+            </div>
+        </div>
+        <div class="row navbar navbar-expand-sm bg-light">
+            {#    <div class=" col-12 navbar navbar-expand-sm bg-light">#}
+            <div class="ml-auto mr-2">
+                {#            <button class="btn btn-success" ><a style="color: white;" href="{% url "add_filter" %}">Добавить</a></button>#}
+                <a href="{% url "add_filter" %}">
+                    <button class="btn btn-success ">Добавить</button>
+                </a>
+            </div>
+
+
+                <input type="submit" class="btn btn-outline-success" value="Удалить" form="change">
+
+
+
+        </div>
+    </div>
+{% endblock content %}

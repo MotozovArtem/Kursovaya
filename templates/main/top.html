@@ -1,0 +1,28 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% block title %}Топ продаж{% endblock title %}
+{% block content %}
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 bg-dark"><span class="title_section">Популярные позиции</span>
+                </div>
+            </div>
+            <div class="row mt-2 mb-2">
+                {% for filter in filter_top_list %}
+                    <div class="col-lg-3">
+                        <div class="product-item border">
+                            <div>
+                                <img src="/" class="img-fluid">
+                            </div>
+                            <p class="filter_index">{{ filter.article }}<br> {{ filter.category }}<br> {{ filter.brand }}<br><span
+                                    class="filter_price">{{ filter.price }} руб.</span></p>
+                            <a href="/" class="filter_watch_index">Посмотреть</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

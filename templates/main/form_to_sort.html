@@ -1,0 +1,66 @@
+{% csrf_token %}
+<label for="pag">Выводить по </label>
+<select class="form-control-sm ml-2 mr-4" name="pag" id="pag" onchange="this.form.submit()">
+    {% if has_pag %}
+        {% ifequal req.GET.pag 10 %}
+            <option value="10" selected>10</option>
+        {% else %}
+            <option value="10">10</option>
+        {% endifequal %}
+        {% ifequal req.GET.pag '20' %}
+            <option value="20" selected>20</option>
+        {% else %}
+            <option value="20">20</option>
+        {% endifequal %}
+        {% ifequal req.GET.pag '30' %}
+            <option value="30" selected>30</option>
+        {% else %}
+            <option value="30">30</option>
+        {% endifequal %}
+        {% ifequal req.GET.pag '50' %}
+            <option value="50" selected>50</option>
+        {% else %}
+            <option value="50">50</option>
+        {% endifequal %}
+    {% else %}
+        <option value="10">10</option>
+        <option value="20" selected>20</option>
+        <option value="30">30</option>
+        <option value="50">50</option>
+    {% endif %}
+</select>
+<select class="form-control-sm" name="sort" onchange="this.form.submit()" id="sort">
+    {% if has_sort %}
+        {% ifequal req.GET.sort "default" %}
+            <option value="default" selected>Сортировать по</option>
+        {% else %}
+            <option value="default">Сортировать по</option>
+        {% endifequal %}
+        {% ifequal req.GET.sort "price_asc" %}
+            <option value="price_asc" selected>Цена, по возрастанию</option>
+        {% else %}
+            <option value="price_asc">Цена, по возрастанию</option>
+        {% endifequal %}
+        {% ifequal req.GET.sort 'price_desc' %}
+            <option value="price_desc" selected>Цена, по убыванию</option>
+        {% else %}
+            <option value="price_desc">Цена, по убыванию</option>
+        {% endifequal %}
+        {% ifequal req.GET.sort 'asc_article' %}
+            <option value="asc_article" selected>Артикул, по возрастанию</option>
+        {% else %}
+            <option value="asc_article">Артикул, по возрастанию</option>
+        {% endifequal %}
+        {% ifequal req.GET.pag 'desc_article' %}
+            <option value="desc_article" selected>Артикул, по убыванию</option>
+        {% else %}
+            <option value="desc_article">Артикул, по убыванию</option>
+        {% endifequal %}
+    {% else %}
+        <option value="default" selected>Сортировать по</option>
+        <option value="price_asc">Цена, по возрастанию</option>
+        <option value="price_desc">Цена, по убыванию</option>
+        <option value="asc_article">Артикул, по возрастанию</option>
+        <option value="desc_article">Артикул, по убыванию</option>
+    {% endif %}
+</select>

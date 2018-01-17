@@ -1,0 +1,97 @@
+{% extends "admin/admin_base.html" %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class=" row navbar navbar-expand-sm bg-light">
+
+            {#            <form class="form-inline" method="POST" action="">#}
+            {#                {% csrf_token %}#}
+            {#                <input class="form-control mr-sm-2" name="search" type="text" placeholder="Поиск">#}
+            {#                <button class="btn btn-success" type="submit">Поиск</button>#}
+            {#            </form>#}
+            {##}
+            {#            <form class="form-inline ml-2" method="POST" action="">#}
+            {#                {% csrf_token %}#}
+            {#                <select class="form-control" name="sort">#}
+            {#                    <option value="ins_surname" selected>Сортировать по</option>#}
+            {#                    <option value="ins_surname">По артикулу А-Я</option>#}
+            {#                    <option value="desc_surname">По артиклу Я-А</option>#}
+            {#                    <option value="ins_age">По возрастанию цены</option>#}
+            {#                    <option value="desc_age">По убыванию цены</option>#}
+            {#                </select>#}
+            {#            </form>#}
+
+
+            <div class="ml-auto mr-4">
+                {#            <button class="btn btn-success" ><a style="color: white;" href="{% url "add_filter" %}">Добавить</a></button>#}
+                <a href="{% url "add_order" %}">
+                    <button class="btn btn-success">Добавить</button>
+                </a>
+            </div>
+            <form id="del_order" method="POST" action="{% url "delete_order" %}" class="form">
+                {% csrf_token %}
+                <input type="submit" class="btn btn-outline-success" value="Удалить">
+            </form>
+        </div>
+
+
+        <div class="row">
+            <div class="col-lg-12">
+                <table class="table table-bordered">
+                    <thead class="bg-light">
+                    <tr>
+                        <th>Имя</th>
+                        <th>E-mail</th>
+                        <th>Телефон</th>
+                        <th>Итого</th>
+                        <th>Статус</th>
+                        <th>Комментарий <br/>к заказу</th>
+                        <th>Дата создания</th>
+                        <th>Дата редактирования</th>
+                        <th>Просмотреть</th>
+                        <th>Изменить</th>
+                        <th>Удалить</th>
+                    </tr>
+                    </thead>
+                    {% for order in order_list %}
+                        <tr>
+                            <td>{{ order.customer_name }}</td>
+                            <td>{{ order.customer_email }}</td>
+                            <td>{{ order.customer_phone }}</td>
+                            <td>{{ order.total_price }}</td>
+                            <td>{{ order.status }}</td>
+                            <td>{{ order.comments }}</td>
+                            <td>{{ order.created }}</td>
+                            <td>{{ order.updated }}</td>
+                            <td>
+                                <a href="{% url "detail_order" order.id_order %}">
+                                    <button type="submit" class="btn-sm btn-success">Подробнее</button>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{% url "edit_order" order.id_order %}">
+                                    <button type="submit" class="btn-sm btn-success">Изменить</button>
+                                </a>
+                            </td>
+                            <td style="text-align: center; vertical-align: middle">
+                                <label for="{{ order.id_order }}"></label>
+                                <input type="checkbox" name="del" id="{{ order.id_order }}" form="del_order"
+                                       value="{{ order.id_order }}">
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+        <div class=" row navbar navbar-expand-sm bg-light">
+            <div class="ml-auto mr-4">
+                {#            <button class="btn btn-success" ><a style="color: white;" href="{% url "add_filter" %}">Добавить</a></button>#}
+                <a href="{% url "add_order" %}">
+                    <button class="btn btn-success">Добавить</button>
+                </a>
+            </div>
+            <input type="submit" class="btn btn-outline-success" value="Удалить" form="del_order">
+        </div>
+    </div>
+
+{% endblock content %}

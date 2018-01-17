@@ -1,35 +1,41 @@
-<div class="row">
-<nav class=" col navbar bg-dark navbar-dark text-center">
-    <div class="row container-fluid">
+<nav class=" col navbar bg-dark navbar-dark footer">
+    <div class="row ">
+{#        <div class="col">#}
+{#            <h4>Информация</h4>#}
+{#            <ul class="navbar-nav" >#}
+{#                <li class="nav-item"><a class="nav-link" href="#">Скидки</a></li>#}
+{#                <li class="nav-item"><a class="nav-link" href="#">Новые поступления</a></li>#}
+{#                <li class="nav-item"><a class="nav-link" href="#">Топ продаж</a></li>#}
+{#                <li class="nav-item"><a class="nav-link" href="#">Условия возврата</a></li>#}
+{#                <li class="nav-item"><a class="nav-link" href="#">О компании</a></li>#}
+{#            </ul>#}
+{#        </div>#}
         <div class="col">
-            <h4>Information</h4>
             <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link" href="two-column.html">About Us</a></li>
-                <li class="nav-item"><a class="nav-link" href="typography.html">Delivery Information</a></li>
-                <li class="nav-item"><a class="nav-link" href="typography.html">Privacy Policy</a></li>
-                <li class="nav-item"><a class="nav-link" href="typography.html">Terms &amp; Conditions</a></li>
+                <li class="nav-item"><h4 style="color: #CCCCCC">Категории</h4></li>
+                {% for cat in categorys %}
+                    <li class="nav-item"><a class="nav-link" href="{% url "filter_of_category" cat.id_category %}">{{ cat.name }}</a></li>
+                {% endfor %}
             </ul>
         </div>
+{#        <div class="col">#}
+{#            <h4>Личный кабинет</h4>#}
+{#            <ul class="navbar-nav">#}
+{#                <li class="nav-item"><a class="nav-link" href="#">Мои заказы</a></li>#}
+{#                <li class="nav-item"><a class="nav-link" href="#">Личная информация</a></li>#}
+{#                <li class="nav-item"><a class="nav-link" href="#">Мои купоны</a></li>#}
+{#            </ul>#}
+{#        </div>#}
         <div class="col">
+            <h4 style="color: #CCCCCC">Свяжитесь с нами</h4>
             <ul class="navbar-nav">
-                <li class="nav-item"><h4>Extras</h4></li>
-                <li class="nav-item"><a class="nav-link" href="typography.html">Brands</a></li>
-                <li class="nav-item"><a class="nav-link" href="typography.html">Gift Vouchers</a></li>
-                <li class="nav-item"><a class="nav-link" href="typography.html">Affiliates</a></li>
-                <li class="nav-item"><a class="nav-link" href="typography.html">Specials</a></li>
-
-            </ul>
-        </div>
-        <div class="col">
-            <h4>My Account</h4>
-            <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link" href="my_account.html">My Account</a></li>
-                <li class="nav-item"><a class="nav-link" href="typography.html">Order History</a></li>
-                <li class="nav-item"><a class="nav-link" href="typography.html">Wish List</a></li>
-                <li class="nav-item"><a class="nav-link" href="typography.html">Newsletter</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">ОАО "FilterShopImport"</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Тел.: 8 (800) 555-35-35</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Email: info@gmail.com</a></li>
+                </li>
             </ul>
         </div>
 
     </div>
 </nav>
-</div>
+

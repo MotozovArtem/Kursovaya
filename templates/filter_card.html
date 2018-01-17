@@ -1,0 +1,95 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% block title %}
+    {{ filter_item.article }} {{ cat.name }} {{ brand.name }}
+{% endblock title %}
+{% block header %}
+    {% include "main/header.html" %}
+{% endblock header %}
+{% block left-menu %}
+    {% include "main/left_menu.html" %}
+{% endblock left-menu %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <ul class=" col-lg-12 nav">
+                <li class="breadcrumb-item"><a href="{% url "main" %}">Главная</a></li>
+                <li class="breadcrumb-item"><a
+                        href="{% url "filter_of_category" cat.id_category %}">{{ cat.name }}</a></li>
+                <li class="breadcrumb-item active">{{ filter_item.article }} {{ cat.name }} {{ brand.name }}</li>
+            </ul>
+        </div>
+        <div class="row mt-2">
+            <div class="col-lg-5">
+                {% for filter in filter_item.filterimage_set.all %}
+                    <img src="{{ filter.image.url }}" class="img-fluid" style="border: 1px solid #dddddd;">
+                {% endfor %}
+            </div>
+            <div class="col-lg-7">
+                <h3 style="margin-top: 5px">{{ filter_item.article }} {{ filter_item.name }} {{ brand.name }}</h3>
+                <div>
+                    {#                <p>Розничная цена</p>#}
+                    {% ifnotequal filter_item.sale 0.0 %}
+
+                        <p>
+                            <del style="color: black; font-size: 20px; font-weight: 700;">{{ filter_item.price }} руб.
+                            </del>
+                            <br>
+                            <span style="color: red; font-size: 20px; font-weight: 700;">{{ filter_item.new_price }} руб.</span>
+                        </p>
+
+                    {% else %}
+
+                        <p style="color: #8B0000; font-size: 20px; font-weight: 700;">{{ filter_item.price }} руб.</p>
+
+                    {% endifnotequal %}
+
+                </div>
+
+                <form class="mb-2 form_buy_product" action="{% url "basket_adding" %}">
+                    {% csrf_token %}
+                    <div class="input-group w-50">
+                        <input type="number" class="form-control mr-4" min="1" value="1" name="number" id="number">
+
+                        {#                        При нажатии на кнопку, формируются данные, которые мы выхватываем в js#}
+                        <button class="btn btn-success" type="submit" id="submit-btn" name="sub"
+                                data-filter-id="{{ filter_item.id_filter }}"
+                                data-name="{{ filter_item.category.name }}"
+                                data-article="{{ filter_item.article }}"
+                                data-brand="{{ filter_item.brand.name }}"
+                                data-price="{{ price }}"
+                                data-category="{{ filter_item.category.name }}"
+                        >
+                            В корзину
+                        </button>
+
+                    </div>
+                </form>
+
+                <div class="row">
+                    <div class="table-sm table-striped mt-2" id="char"
+                         style="font-size: 14px">{% autoescape off %}{{ filter_item.specific }}{% endautoescape %}
+                    </div>
+                </div>
+            </div>
+            <div class="row mr-auto mt-3 mb-4">
+                <div class="table-sm table-striped text-center" style="font-size: 14px;">
+                    <h3>Является аналогом для фильтров: </h3>
+                    {% autoescape off %}
+                        {{ filter_item.description }}
+                    {% endautoescape %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+{% endblock content %}
+{% block right-menu %}
+    {% include "main/right_menu.html" %}
+{% endblock right-menu %}
+{% block footer %}
+    {% include "main/footer.html" %}
+{% endblock footer %}

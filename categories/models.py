@@ -4,7 +4,7 @@ from django.db import models
 # Create your models here.
 class Category(models.Model):
     id_category = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=100)
+    name = models.CharField(verbose_name="Категория",max_length=100)
 
     class Meta:
         verbose_name = "Категория"

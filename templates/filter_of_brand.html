@@ -1,0 +1,201 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% block title %}{{ br.name }}{% endblock title %}
+{% block header %}
+    {% include "main/header.html" %}
+{% endblock header %}
+{% block left-menu %}
+    {% include "main/left_menu.html" %}
+{% endblock left-menu %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <ul class=" col-lg-12 nav">
+                <li class="breadcrumb-item"><a href="{% url "main" %}">Главная</a></li>
+                <li class="breadcrumb-item active">{{ br.name }}</li>
+            </ul>
+        </div>
+        <div class="title row">{{ br.name }}</div>
+
+        {% if filter_image_list %}
+            <form method="GET" action="" class="form-inline mt-2 mb-2">
+                {% include "main/form_to_sort.html" %}
+                <div class="dropdown ml-4">
+                    <button type="button" class="btn-sm btn-success dropdown-toggle" data-toggle="dropdown">
+                        Категории
+                    </button>
+                    <div class="dropdown-menu">
+                        {% for cat in categorys %}
+                            <a class="dropdown-item"
+                               href="{% url "category_in_brand" br.id_brand cat.id_category %}">{{ cat.name }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </form>
+            <div class=" row">
+                {% if filter_image_list.has_other_pages %}
+
+                    <ul class="pagination pagination-sm ">
+                        {% if filter_image_list.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link"
+                                   href="{% url "filter_of_brand" br.id_brand  %}?page={{ filter_image_list.previous_page_number }}{% if has_pag %}&pag={{ pag }}{% endif %}{% if has_sort %}&sort={{ sort }}{% endif %}">&laquo;</a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled"><a class="page-link"><span>&laquo;</span></a></li>
+                        {% endif %}
+                       {% ifnotequal filter_image_list.number 1 %}
+                        <li class="page-item">
+                             <a class="page-link"
+                               href="{% url "filter_of_brand" br.id_brand %}?page=1{% if has_pag %}&pag={{ pag }}{% endif %}{% if has_sort %}&sort={{ sort }}{% endif %}">1</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item active">
+                            <a class="page-link"
+                               href="{% url "filter_of_brand" br.id_brand %}?page=1{% if has_pag %}&pag={{ pag }}{% endif %}{% if has_sort %}&sort={{ sort }}{% endif %}">1</a>
+                        </li>
+                    {% endifnotequal %}
+                    {% if filter_image_list.number != 1 and filter_image_list.number != 2 %}
+                        {% ifnotequal filter_image_list.number 3 %}
+                            <li class="page-item">
+                                <span class="page-link">...</span>
+                            </li>
+                        {% endifnotequal %}
+                        <li class="page-item">
+                        <a class="page-link"
+                               href="{% url "filter_of_brand" br.id_brand %}?page={{ filter_image_list.previous_page_number }}{% if has_pag %}&pag={{ pag }}{% endif %}{% if has_sort %}&sort={{ sort }}{% endif %}">{{ filter_image_list.previous_page_number }}</a>
+                        </li>
+                    {% endif %}
+                    {% if filter_image_list.number != filter_image_list.paginator.page_range|last and  filter_image_list.number != 1 %}
+                        <li class="page-item active">
+                         <a class="page-link"
+                               href="{% url "filter_of_brand" br.id_brand %}?page={{ filter_image_list.number }}{% if has_pag %}&pag={{ pag }}{% endif %}{% if has_sort %}&sort={{ sort }}{% endif %}">{{ filter_image_list.number }}</a>
+                        </li>
+                    {% endif %}
+                    {% if filter_image_list.number != filter_image_list.paginator.page_range|last and filter_image_list.number != filter_image_list.paginator.page_range|last|add:-1 %}
+                        <li class="page-item">
+                        <a class="page-link"
+                               href="{% url "filter_of_brand" br.id_brand %}?page={{ filter_image_list.next_page_number }}{% if has_pag %}&pag={{ pag }}{% endif %}{% if has_sort %}&sort={{ sort }}{% endif %}">{{ filter_image_list.next_page_number }}</a>
+                        </li>
+                        {% ifnotequal filter_image_list.number filter_image_list.paginator.page_range|last|add:-2 %}
+                            <li class="page-item">
+                                                                <span class="page-link">...</span>
+                            </li>
+                        {% endifnotequal %}
+
+                    {% endif %}
+                    {% ifequal filter_image_list.paginator.page_range|last  filter_image_list.number %}
+                        <li class="page-item active">
+                            <a class="page-link"
+                               href="{% url "filter_of_brand" br.id_brand %}?page={{ filter_image_list.paginator.page_range|last }}{% if has_pag %}&pag={{ pag }}{% endif %}{% if has_sort %}&sort={{ sort }}{% endif %}">{{ filter_image_list.paginator.page_range|last }}</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link"
+                               href="{% url "filter_of_brand" br.id_brand %}?page={{ filter_image_list.paginator.page_range|last }}{% if has_pag %}&pag={{ pag }}{% endif %}{% if has_sort %}&sort={{ sort }}{% endif %}">{{ filter_image_list.paginator.page_range|last }}</a>
+                        </li>
+                    {% endifequal %}
+                        {% if filter_image_list.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" aria-label="Next"
+                                   href="{% url "filter_of_brand" br.id_brand %}?page=
+
+
+
+
+                                           {{ filter_image_list.next_page_number }}{% if has_pag %}&pag={{ pag }}{% endif %}{% if has_sort %}&sort={{ sort }}{% endif %}">&raquo;</a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled"><a class="page-link"><span>&raquo;</span></a></li>
+                        {% endif %}
+                    </ul>
+                {% endif %}
+            </div>
+            <div class="row"><span
+                    style="color: #000; margin-left: auto"> Кол-во товаров: {{ paginator.count }} </span></div>
+            {% include "main/product_item_catalog.html" %}
+        {% else %}
+            <div class="row">По вашему запросу ничего не найдено.</div>
+        {% endif %}
+        <div class=" row">
+            {% if filter_image_list.has_other_pages %}
+
+                <ul class="pagination pagination-sm ">
+                    {% if filter_image_list.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link"
+                               href="{% url "filter_of_brand" br.id_brand  %}?page={{ filter_image_list.previous_page_number }}{% if has_pag %}&pag={{ pag }}{% endif %}{% if has_sort %}&sort={{ sort }}{% endif %}">&laquo;</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled"><a class="page-link"><span>&laquo;</span></a></li>
+                    {% endif %}
+                    {% ifnotequal filter_image_list.number 1 %}
+                        <li class="page-item">
+                             <a class="page-link"
+                               href="{% url "filter_of_brand" br.id_brand %}?page=1{% if has_pag %}&pag={{ pag }}{% endif %}{% if has_sort %}&sort={{ sort }}{% endif %}">1</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item active">
+                            <a class="page-link"
+                               href="{% url "filter_of_brand" br.id_brand %}?page=1{% if has_pag %}&pag={{ pag }}{% endif %}{% if has_sort %}&sort={{ sort }}{% endif %}">1</a>
+                        </li>
+                    {% endifnotequal %}
+                    {% if filter_image_list.number != 1 and filter_image_list.number != 2 %}
+                        {% ifnotequal filter_image_list.number 3 %}
+                            <li class="page-item">
+                                <span class="page-link">...</span>
+                            </li>
+                        {% endifnotequal %}
+                        <li class="page-item">
+                        <a class="page-link"
+                               href="{% url "filter_of_brand" br.id_brand %}?page={{ filter_image_list.previous_page_number }}{% if has_pag %}&pag={{ pag }}{% endif %}{% if has_sort %}&sort={{ sort }}{% endif %}">{{ filter_image_list.previous_page_number }}</a>
+                        </li>
+                    {% endif %}
+                    {% if filter_image_list.number != filter_image_list.paginator.page_range|last and  filter_image_list.number != 1 %}
+                        <li class="page-item active">
+                         <a class="page-link"
+                               href="{% url "filter_of_brand" br.id_brand %}?page={{ filter_image_list.number }}{% if has_pag %}&pag={{ pag }}{% endif %}{% if has_sort %}&sort={{ sort }}{% endif %}">{{ filter_image_list.number }}</a>
+                        </li>
+                    {% endif %}
+                    {% if filter_image_list.number != filter_image_list.paginator.page_range|last and filter_image_list.number != filter_image_list.paginator.page_range|last|add:-1 %}
+                        <li class="page-item">
+                        <a class="page-link"
+                               href="{% url "filter_of_brand" br.id_brand %}?page={{ filter_image_list.next_page_number }}{% if has_pag %}&pag={{ pag }}{% endif %}{% if has_sort %}&sort={{ sort }}{% endif %}">{{ filter_image_list.next_page_number }}</a>
+                        </li>
+                        {% ifnotequal filter_image_list.number filter_image_list.paginator.page_range|last|add:-2 %}
+                            <li class="page-item">
+                                                                <span class="page-link">...</span>
+                            </li>
+                        {% endifnotequal %}
+
+                    {% endif %}
+                    {% ifequal filter_image_list.paginator.page_range|last  filter_image_list.number %}
+                        <li class="page-item active">
+                            <a class="page-link"
+                               href="{% url "filter_of_brand" br.id_brand %}?page={{ filter_image_list.paginator.page_range|last }}{% if has_pag %}&pag={{ pag }}{% endif %}{% if has_sort %}&sort={{ sort }}{% endif %}">{{ filter_image_list.paginator.page_range|last }}</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link"
+                               href="{% url "filter_of_brand" br.id_brand %}?page={{ filter_image_list.paginator.page_range|last }}{% if has_pag %}&pag={{ pag }}{% endif %}{% if has_sort %}&sort={{ sort }}{% endif %}">{{ filter_image_list.paginator.page_range|last }}</a>
+                        </li>
+                    {% endifequal %}
+                    {% if filter_image_list.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" aria-label="Next"
+                               href="{% url "filter_of_brand" br.id_brand %}?page={{ filter_image_list.next_page_number }}{% if has_pag %}&pag={{ pag }}{% endif %}{% if has_sort %}&sort={{ sort }}{% endif %}">&raquo;</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled"><a class="page-link"><span>&raquo;</span></a></li>
+                    {% endif %}
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+{% endblock content %}
+{% block right-menu %}
+    {% include "main/right_menu.html" %}
+{% endblock right-menu %}
+{% block footer %}
+    {% include "main/footer.html" %}
+{% endblock footer %}

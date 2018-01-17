@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Админка</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--Bootstrap 4 & jQuery 3.2.1-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main_styles.css' %}">
+
+    <script src="{% static "tinymce/tinymce.min.js" %}" language="JavaScript"></script>
+    <script language="JavaScript" type="text/javascript">
+        tinymce.init({
+            selector: "textarea",
+            language: "ru",
+            height: 150,
+            menubar: true,
+            plugins: ['advlist autolink lists link image charmap print preview anchor textcolor',
+                'searchreplace visualblocks code fullscreen',
+                'insertdatetime media table contextmenu paste code help'],
+            toolbar: 'insert | undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist | numlost outdent indent | removeformat | help | preview',
+        });
+    </script>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col navbar navbar-expand-sm bg-dark navbar-dark">
+            <a class="navbar-brand" href="{% url "main" %}">FilerShop</a>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url  "myadmin" %}">На главную</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url "admin_filter" %}">Товары</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url "admin_brand" %}">Производители</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url "admin_cat" %}">Категории</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url "admin_order" %}">Заказы</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    {% if user.is_auth %}
+                        <a class="nav-link" href="{% url "logout" %}">Выход</a>
+                    {% endif %}
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="row mt-2">
+        {% block content %}
+        {% endblock content %}
+    </div>
+</div>
+</body>
+</html>

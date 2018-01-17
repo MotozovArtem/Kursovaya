@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'authenticate',
     'lk',
     'orders',
+    'easy_thumbnails',
+    'myadmin',
 ]
 
 MIDDLEWARE = [
@@ -67,6 +69,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'orders.context_processors.getting_basket_info',
             ],
         },
     },
@@ -128,13 +131,19 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-MEDIA_URL = '/media/'
+MEDIA_URL = '/images/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'filters_images')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'images')
 
 LOGIN_URL = "/authenticate/login"
 LOGOUT_URL = "/authenticate/logout"
 
 AUTH_USER_MODEL = 'authenticate.MyUser'
 
-# THUMBNAIL_BASEDIR="thumbnails"
+THUMBNAIL_ALIASES = {
+    "filter.FilterImage.image": {
+        "bw": {"size": (200, 100), "bw": True}, }
+}
+
+THUMBNAIL_BASEDIR = "/filters_images"
+THUMBNAIL_SUBDIR = "thumbnails"

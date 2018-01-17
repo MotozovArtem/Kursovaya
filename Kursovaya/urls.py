@@ -27,6 +27,8 @@ urlpatterns = [
     url(r'^brands/', include("brands.urls")),
     url(r'^authenticate/', include("authenticate.urls")),
     url(r'^lk/', include("lk.urls")),
+    url(r'^myadmin/', include("myadmin.urls")),
+    url(r'^order/', include("orders.urls")),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

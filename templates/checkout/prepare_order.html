@@ -1,0 +1,73 @@
+{% extends "main/base.html" %}
+
+{% block header %}
+    {% include "main/header.html" %}
+{% endblock header %}
+
+{% block left-menu %}
+    {% include "main/left_menu.html" %}
+{% endblock %}
+
+{% block title %}
+    Корзина
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <h3>Оформление заказа</h3>
+            <form action="" class="form form-control w-75 ml-auto mr-auto" method="POST">
+                {% csrf_token %}
+                <table class="table">
+                    <tr>
+                        <td>
+                            <label for="customer_name">Имя</label>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" name="{{ form.customer_name.name }}"
+                                   id="customer_name"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="customer_phone">Телефон</label>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" name="{{ form.customer_phone.name }}"
+                                   id="customer_phone">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="customer_email">E-mail</label>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" name="{{ form.customer_email.name }}"
+                                   id="customer_email">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="customer_comments">Комментарий к заказу</label>
+                        </td>
+                        <td>
+                            <textarea class="form-control" name="{{ form.comments.name }}"
+                                      id="customer_comments"></textarea>
+                        </td>
+                    </tr>
+                </table>
+                <div class="text-right">
+                    <input class="btn btn-success" value="Подтвердить" name="send" type="submit">
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block right-menu %}
+    {% include "main/right_menu.html" %}
+{% endblock %}
+
+{% block footer %}
+    {% include "main/footer.html" %}
+{% endblock %}

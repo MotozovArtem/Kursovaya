@@ -1,0 +1,28 @@
+<div class="col-lg-3 mt-2">
+    <div class="product-item_index">
+        <div style="text-align: center">
+            <a href="{% url "filter_card" filter.filter.id_filter %}">
+                <img style="border: 1px solid #cccccc" width="120" class="img-fluid "
+                     src="/images/{{ filter.image }}"></a>
+        </div>
+        {% ifnotequal filter.filter.discount 0 %}
+            <div class="discount">
+                {{ filter.filter.discount }}%
+            </div>
+        {% endifnotequal %}
+        <p class="filter_index">{{ filter.filter.article }}<br>{{ filter.filter.category.name }}<br> {{ filter.filter.brand.name }}<br>
+            {% ifnotequal filter.filter.discount 0 %}
+                <del
+                        class="filter_price_index" style="color: black">{{ filter.filter.price }} руб.
+                </del>
+                <br><span class="filter_new_price_index">{{ filter.filter.new_price }} руб.</span>
+            {% else %}
+                <span
+                        class="filter_price_index" style="color: #8B0000">{{ filter.filter.price }} руб.
+                </span>
+            {% endifnotequal %}
+
+            <a style="text-align: center" href="{% url "filter_card" filter.filter.id_filter %}"
+               class="filter_watch_index">Посмотреть</a></p>
+    </div>
+</div>

@@ -1,0 +1,98 @@
+{% extends "main/base.html" %}
+
+{% block header %}
+    {% include "main/header.html" %}
+{% endblock header %}
+
+{% block left-menu %}
+    {% include "main/left_menu.html" %}
+{% endblock %}
+
+{% block title %}
+    Корзина
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="text-left">Корзина</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+
+                <form class="form-row" action="{% url "basket_update" %}" method="POST" name="order">
+                    {% csrf_token %}
+                    <div class="mb-2 ml-auto">
+                        <div class="btn-group">
+                            <div class="dropdown ml-4">
+                                <button class="btn-sm btn-success dropdown-toggle" data-toggle="dropdown">
+                                    Очистить корзину
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="#" id="clear_all">Удалить все</a>
+                                    <a class="dropdown-item" href="#" id="del_selected">Удалить выбранное</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table table-hover form-group">
+                        <thead valign="middle" align="center">
+                        <tr>
+                            <th>Товар</th>
+                            <th>Цена</th>
+                            <th>Количество</th>
+                            <th>Сумма</th>
+                            <th>Удалить</th>
+                        </tr>
+                        </thead>
+                        <tbody id="cart_body">
+                        {% for product in request.session.cart %}
+                            <tr valign="middle" align="center">
+                                <td>
+                                    <p>{{ product.filter_article }} {{ product.filter_cat }} </p>
+                                    <input type="hidden" value="{{ product.filter_id }}" class="hidden">
+                                </td>
+                                <td>
+                                <span class="product_price">
+                                   {{ product.filter_price }}
+                                </span>
+                                </td>
+                                <td>
+                                    <input class="w-50 product_amount" type="number" value="{{ product.numb }}"
+                                           min="1"
+                                           step="1" name="product_in_bascket_{{ product.id_productInBascet }}">
+                                </td>
+                                <td><span class="total_product_in_basket_amount">
+                                    {{ product.total_price }}
+                                </span>
+                                </td>
+                                <td>
+                                    <input type="checkbox" name="is_del" class="checkbox">
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="float-right ml-auto">
+                        <b>Сумма заказа: <span id="total_order_amount"></span> <i class="fa fa-rub"></i></b>
+                    </div>
+                </form>
+                <div class="float-right mt-2">
+                    <a href="{% url "prepare_order" %}">
+                        <button type="submit" class="btn btn-success" form="order">Оформить заказ</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block right-menu %}
+    {% include "main/right_menu.html" %}
+{% endblock %}
+
+{% block footer %}
+    {% include "main/footer.html" %}
+{% endblock %}

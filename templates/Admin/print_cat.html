@@ -1,0 +1,77 @@
+{% extends "admin/admin_base.html" %}
+
+{% block content %}
+    <div class="container-fluid">
+
+        <div class=" row navbar navbar-expand-sm bg-light">
+
+{#            <form class="form-inline" method="POST" action="">#}
+{#                {% csrf_token %}#}
+{#                <input class="form-control mr-sm-2" name="search" type="text" placeholder="Поиск">#}
+{#                <button class="btn btn-success" type="submit">Поиск</button>#}
+{#            </form>#}
+{##}
+{#            <form class="form-inline ml-2" method="POST" action="">#}
+{#                {% csrf_token %}#}
+{#                <select class="form-control" name="sort">#}
+{#                    <option value="ins_surname" selected>Сортировать по</option>#}
+{#                    <option value="ins_surname">По артикулу А-Я</option>#}
+{#                    <option value="desc_surname">По артиклу Я-А</option>#}
+{#                    <option value="ins_age">По возрастанию цены</option>#}
+{#                    <option value="desc_age">По убыванию цены</option>#}
+{#                </select>#}
+{#            </form>#}
+
+
+            <div class="ml-auto mr-4">
+                {#            <button class="btn btn-success" ><a style="color: white;" href="{% url "add_filter" %}">Добавить</a></button>#}
+                <a href="{% url "add_cat" %}">
+                    <button class="btn btn-success">Добавить</button>
+                </a>
+            </div>
+            <form id="del_cat" method="POST" action="{% url "delete_cat" %}" class="form">
+                {% csrf_token %}
+                <input type="submit" class="btn btn-outline-success" value="Удалить">
+            </form>
+
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <table class="table table-bordered">
+                    <thead class="bg-light">
+                    <tr>
+                        <th>Название</th>
+                        <th>Изменить</th>
+                        <th>Удалить</th>
+                    </tr>
+                    </thead>
+                    {% for categories in category_list %}
+                        <tr>
+                            <td>{{ categories.name }}</td>
+                            <td>
+                                <a href="{% url "edit_cat" categories.id_category %}">
+                                    <button type="submit" class="btn-sm btn-success">Изменить</button>
+                                </a>
+                            </td>
+                            <td style="text-align: center; vertical-align: middle">
+                                <input type="checkbox" value="{{ categories.id_category }}" name="del" id="{{ categories.id_category }}" form="del_cat">
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+        <div class=" row navbar navbar-expand-sm bg-light">
+
+            <div class="ml-auto mr-4">
+                {#            <button class="btn btn-success" ><a style="color: white;" href="{% url "add_filter" %}">Добавить</a></button>#}
+                <a href="{% url "add_cat" %}">
+                    <button class="btn btn-success">Добавить</button>
+                </a>
+            </div>
+                <input type="submit" class="btn btn-outline-success" value="Удалить" form="del_cat">
+        </div>
+    </div>
+
+{% endblock content %}

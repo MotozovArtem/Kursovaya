@@ -2,5 +2,6 @@ from django.conf.urls import url
 from categories import views
 
 urlpatterns = [
-    url(r'^$', views.index, name="categories")
+
+    # url(r'^filters/$', views.filter_of_category, name="filters_of_category"),
 ]

@@ -1,0 +1,15 @@
+{% extends "Admin/admin_base.html" %}
+
+{% block content %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        <table class="table table-hover">
+            {{ form.as_table }}
+        </table>
+        <div class="row" style="margin-bottom: 30px">
+            <div class="col-1 offset-9">
+                <input type="submit" value="Добавить" name="add" class="btn btn-success">
+            </div>
+        </div>
+    </form>
+{% endblock %}

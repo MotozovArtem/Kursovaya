@@ -1,0 +1,25 @@
+{% extends "main/base.html" %}
+
+{% block header %}
+    {% include "main/header.html" %}
+{% endblock header %}
+
+
+{% block title %}
+    Спасибо
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <h2>Спасибо за заказ!</h2>
+            <h4>Наш консультант скоро свяжется с Вами.</h4>
+            <a href="{% url "main" %}"><button class="btn btn-success">На главную</button></a>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block footer %}
+    {% include "main/footer.html" %}
+{% endblock %}
